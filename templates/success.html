@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+	{% with messages = get_flashed_messages() %}
+	{% if messages %}
+	{% for message in messages %}
+	<h1 style="background-color:#5CA95F;">{{message}}</h1>
+	{% endfor %}
+	{% endif %}
+	{% endwith %}
+	<table>
+		<tr>
+			<th>Email Address</th>
+			<th>Date</th>
+			<th>Time</th>
+		</tr>
+		{% for email in all_emails: %}
+		<tr>
+			<td>{{ email['email_address'] }}</td>
+			<td>{{ email['date'] }}</td>
+			<td>{{ email['time'] }}</td>
+			<td>
+				<form action="/success/{{ email['id'] }}/delete" method="post">
+					<input type="submit" name="Delete">
+				</form>
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+</body>
+</html>
